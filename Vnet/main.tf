@@ -19,6 +19,9 @@ provider "azurerm" {
 locals {
   tag_terraform = {
     Environment = "Test"
+    Purpose = "Test"
+    Org = "Microsoft"
+    Team = "Galaxy"
   }
 
 }
