@@ -79,6 +79,7 @@ resource "azurerm_public_ip" "ipterraform" {
   location = azurerm_resource_group.rgterraform.location
   allocation_method = "Static"
   tags = local.tag_terraform
+  depends_on = [ azurerm_virtual_network.vnetterraform, azurerm_subnet.subnet1terraform ]
   
 }
 
@@ -90,6 +91,7 @@ resource "azurerm_network_interface" "nicterraform" {
     name = "internal"
     subnet_id = azurerm_subnet.subnet1terraform.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.ipterraform.id
   }
   tags = local.tag_terraform
   
