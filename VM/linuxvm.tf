@@ -9,8 +9,6 @@ resource "azurerm_linux_virtual_machine" "linuxvmterraform" {
     azurerm_network_interface.nicterraform.id
   ]
 
-  
-
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
@@ -22,4 +20,6 @@ resource "azurerm_linux_virtual_machine" "linuxvmterraform" {
     sku       = "22_04-lts"
     version   = "latest"
   }
+
+  #custom_data = filebase64("${path.module}/app-scripts/web-vm.sh")
 }

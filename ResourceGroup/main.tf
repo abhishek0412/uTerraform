@@ -15,7 +15,29 @@ provider "azurerm" {
 }
 
 # Create Resource Group 
-resource "azurerm_resource_group" "rg-terraform" {
+/* resource "azurerm_resource_group" "rg-terraform" {
+  count = 2
   location = "eastus"
-  name = "rg-terraforma"  
+  name = "rg-terraform${count.index}"  
+  #name = "rg-terraform"
+  tags = {
+    Environment = "Test"
+    Purpose     = "Test"
+    Org         = "Microsoft"
+    Team        = "Galaxy"
+  }
+} */
+
+resource "azurerm_resource_group" "name" {
+  
+  #for_each = { name1="terra-Abhishek",name2="terra-Supriya", name3="terra-Baby" }
+  for_each = toset([ "abhishek","supriya","baby" ])
+  location = "eastus" 
+  name = each.key
+  tags = {
+    Environment = "Test"
+    Purpose     = "Test"
+    Org         = "Microsoft"
+    Team        = "Galaxy"
+  }
 }
