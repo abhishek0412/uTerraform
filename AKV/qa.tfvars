@@ -1,8 +1,8 @@
-strGlobalResourceGroupName = "rg-terraform"
+strResourceGroupName = "rg-qa-terraform"
 
-strGlobalResourceGroupLocation = "East US"
+strResourceGroupLocation = "East US"
 
-strGlobalAKVName = "akv-terraform"
+strAKVName = "akv-qa-terraform"
 
 
 
