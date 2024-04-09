@@ -1,8 +1,8 @@
 variable "strResourceGroupName" {
-  type = string
+  type        = string
   description = "Name of the resource group"
-  default = "rg-df-terraform"
-  
+  default     = "rg-df-terraform"
+
 }
 
 variable "strResourceGroupLocation" {
@@ -11,4 +11,12 @@ variable "strResourceGroupLocation" {
 
 variable "strAKVName" {
   default = "akv-df-terraform"
+}
+
+variable "certImported" {
+
+}
+
+variable "certGenerated" {
+
 }
