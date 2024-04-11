@@ -7,6 +7,12 @@ variable "strResourceGroupName" {
 
 variable "strResourceGroupLocation" {
   default = "East US"
+   
+   validation {
+     condition = var.strResourceGroupLocation=="East US"
+     error_message = "Policy doesn't allow any resource in other than East US"
+   }
+
 }
 
 variable "myTag" {

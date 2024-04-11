@@ -1,6 +1,6 @@
 strResourceGroupName = "rg-tfLifeCycle"
 
-strResourceGroupLocation = "East US"
+strResourceGroupLocation = "East US" # "India" Validation doesn't allow to create resource other than East US
 
 myTag = {
     Environment = "QA"
