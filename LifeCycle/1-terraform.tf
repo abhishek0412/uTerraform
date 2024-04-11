@@ -18,13 +18,5 @@ provider "azurerm" {
   }
 }
 
-locals {
-  tag_terraform = {
-    Environment = "Test"
-    Purpose     = "Storage"
-    Org         = "Microsoft"
-    Team        = "Galaxy"
-  }
 
-}
 
