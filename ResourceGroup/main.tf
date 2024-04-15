@@ -46,6 +46,9 @@ resource "azurerm_resource_group" "rg-terraform" {
   }
 }
 
+data "azure" "name" {
+  
+}
 output "Naam" {
   value = [for rgs in azurerm_resource_group.rg-terraform: rgs.name]
 }

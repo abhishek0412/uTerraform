@@ -21,22 +21,22 @@ provider "random" {
 
 
 resource "random_string" "randomName" {
-  length = 6
+  length = terraform.workspace == "default" ? 6 : 20
 
 }
 
 resource "random_integer" "randomNumber" {
 
-  min = 9999
-  max = 999999
+  min = terraform.workspace == "default" ? 9999 : 999999
+  max = terraform.workspace == "default" ? 999999999 : 999999999999
 }
 
 resource "random_password" "randomPassword" {
-  length = 9
+  length = terraform.workspace == "default" ? 99 : 99
 }
 
 resource "random_pet" "randomPetName" {
-
+prefix = terraform.workspace != "default" ? "qa" : null
 }
 
 locals {
