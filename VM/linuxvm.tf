@@ -26,14 +26,19 @@ resource "azurerm_linux_virtual_machine" "linuxvmterraform" {
   provisioner "file" {
     source = ""
     destination = ""
+    on_failure = fail
   }
 
   provisioner "local-exec" {
     command = ""
+    when = create
+    on_failure = continue
   }
 
   provisioner "remote-exec" {
     inline = [ "" ]
+    when = destroy
+    on_failure = continue
   }
 }
 
