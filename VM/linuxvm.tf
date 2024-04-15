@@ -22,4 +22,18 @@ resource "azurerm_linux_virtual_machine" "linuxvmterraform" {
   }
 
   #custom_data = filebase64("${path.module}/app-scripts/web-vm.sh")
+
+  provisioner "file" {
+    source = ""
+    destination = ""
+  }
+
+  provisioner "local-exec" {
+    command = ""
+  }
+
+  provisioner "remote-exec" {
+    inline = [ "" ]
+  }
 }
+
