@@ -30,6 +30,17 @@ provider "random" {
 }
 
 
+resource "time_sleep" "waitFor90Seconds" {
+  create_duration = "5m"
+
+}
+resource "time_static" "JLT" {
+  
+}
+
+resource "null_resource" "JLT2" {
+  
+}
 resource "random_string" "randomName" {
   length = terraform.workspace == "default" ? 6 : 20
 
