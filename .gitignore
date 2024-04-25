@@ -5,3 +5,4 @@
 .terraform*.lock.*
 .DS_Store
 *.plan
+*.log
