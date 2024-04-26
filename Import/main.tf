@@ -13,8 +13,12 @@ provider "azurerm" {
   features {}
 }
 
+import {
+  id = "********************************************"
+  to= azurerm_resource_group.rg-new-terraform
+}
 
-resource "azurerm_resource_group" "rg-terraform" {
+/* resource "azurerm_resource_group" "rg-terraform" {
 
   location = "eastus"
   name     = "importTest"
@@ -25,4 +29,4 @@ resource "azurerm_resource_group" "rg-terraform" {
     Team        = "Galaxy"
   }
 }
-
+ */
