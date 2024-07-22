@@ -1,43 +1,6 @@
-#####################################################################
-# Block-1: Terraform Settings Block
-terraform {
-  required_version = ">= 1.0.0"
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = ">= 2.0"
-    }
-  }
-}
-
-#####################################################################
-# Block-2: Provider Block
-provider "azurerm" {
-  features {}
-}
-
-locals {
-  tag_terraform = {
-    Environment = "Test"
-    Purpose     = "Test"
-    Org         = "Microsoft"
-    Team        = "Galaxy"
-  }
-
-}
-#####################################################################
-# Block-3: Resource Block
-# Create a resource group
-resource "azurerm_resource_group" "rgterraform" {
-  name     = "rg-terraform"
-  location = "East US"
-  tags     = local.tag_terraform
-
-}
-
 resource "azurerm_network_security_group" "nsg-terraform" {
 
-  name                = "nsg-terraform"
+  name                = var.nsg-terraform-name
   location            = azurerm_resource_group.rgterraform.location
   resource_group_name = azurerm_resource_group.rgterraform.name
   tags                = local.tag_terraform
@@ -45,7 +8,7 @@ resource "azurerm_network_security_group" "nsg-terraform" {
 }
 # Create Virtual Network
 resource "azurerm_virtual_network" "vnetterraform" {
-  name                = "vnet-terraform"
+  name                = var.vnet-terraform-name
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rgterraform.location
   resource_group_name = azurerm_resource_group.rgterraform.name
@@ -57,7 +20,7 @@ resource "azurerm_virtual_network" "vnetterraform" {
 
 }
 resource "azurerm_subnet" "subnet1terraform" {
-  name                 = "Subnet1"
+  name                 = var.Subnet1-name
   address_prefixes     = ["10.0.1.0/24"]
   virtual_network_name = azurerm_virtual_network.vnetterraform.name
   resource_group_name  = azurerm_resource_group.rgterraform.name
@@ -65,7 +28,7 @@ resource "azurerm_subnet" "subnet1terraform" {
 }
 
 resource "azurerm_subnet" "subnet2terraform" {
-  name                 = "Subnet2"
+  name                 = var.Subnet2-name
   address_prefixes     = ["10.0.2.0/24"]
   virtual_network_name = azurerm_virtual_network.vnetterraform.name
   resource_group_name  = azurerm_resource_group.rgterraform.name
@@ -74,7 +37,7 @@ resource "azurerm_subnet" "subnet2terraform" {
 }
 
 resource "azurerm_public_ip" "ipterraform" {
-  name                = "ip-terraform"
+  name                = var.ip-terraform-name
   resource_group_name = azurerm_resource_group.rgterraform.name
   location            = azurerm_resource_group.rgterraform.location
   allocation_method   = "Static"
@@ -95,4 +58,18 @@ resource "azurerm_network_interface" "nicterraform" {
   }
   tags = local.tag_terraform
 
+}
+
+resource "azurerm_firewall" "example" {
+  name                = "testfirewall"
+  location            = azurerm_resource_group.rgterraform.location
+  resource_group_name = azurerm_resource_group.rgterraform.name
+  sku_name            = "AZFW_VNet"
+  sku_tier            = "Standard"
+
+  ip_configuration {
+    name                 = "configuration"
+    subnet_id            = azurerm_subnet.subnet1terraform.id
+    public_ip_address_id = azurerm_public_ip.ipterraform.id
+  }
 }
