@@ -8,3 +8,4 @@ variable "strResourceGroupName" {
 variable "strResourceGroupLocation" {
   default = "East US"
 }
+
